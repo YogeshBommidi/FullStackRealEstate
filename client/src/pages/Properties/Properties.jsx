@@ -3,7 +3,7 @@ import "./Properties.css";
 import useProperties from "../../hooks/useProperties";
 import { PuffLoader } from "react-spinners";
 import PropertyCard from "../../components/PropertyCard/PropertyCard";
-import SearchBar from "../../components/SearchBar/SearchBar";
+import SearchBar from "../../components/SearchBAr/SearchBar";
 const Properties = () => {
   const { data, isError, isLoading } = useProperties();
   const [filter, setFilter] = useState("");
