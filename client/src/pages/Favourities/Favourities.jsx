@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import SearchBar from "../../components/SearchBar/SearchBar";
+import SearchBar from "../../components/SearchBAr/SearchBar";
 import useProperties from "../../hooks/useProperties";
 import { PuffLoader } from "react-spinners";
 import PropertyCard from "../../components/PropertyCard/PropertyCard";
