@@ -10,9 +10,8 @@ import useFavourities from "../../hooks/useFavourities";
 import useBookings from "../../hooks/useBookings";
 
 const Layout = () => {
-
-  useFavourities()
-  useBookings()
+  useFavourities();
+  useBookings();
 
   const { isAuthenticated, user, getAccessTokenWithPopup } = useAuth0();
   const { setUserDetails } = useContext(UserDetailContext);
@@ -24,7 +23,6 @@ const Layout = () => {
 
   useEffect(() => {
     const getTokenAndRegsiter = async () => {
-
       const res = await getAccessTokenWithPopup({
         authorizationParams: {
           audience: "http://localhost:8000",
@@ -34,9 +32,8 @@ const Layout = () => {
       localStorage.setItem("access_token", res);
       setUserDetails((prev) => ({ ...prev, token: res }));
       //console.log(res)
-      mutate(res)
+      mutate(res);
     };
-
 
     isAuthenticated && getTokenAndRegsiter();
   }, [isAuthenticated]);

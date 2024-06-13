@@ -3,7 +3,7 @@ import { AiFillHeart } from "react-icons/ai";
 import useAuthCheck from "../../hooks/useAuthCheck";
 import { useMutation } from "react-query";
 import { useAuth0 } from "@auth0/auth0-react";
-import UserDetailContext from "../../context/UserDetailContext";
+import UserDetailContext from "../context/UserDetailContext";
 import { checkFavourities, updateFavourities } from "../../utils/common";
 import { toFav } from "../../utils/api";
 
@@ -18,19 +18,19 @@ const Heart = ({ id }) => {
   } = useContext(UserDetailContext);
 
   useEffect(() => {
-    setHeartColor(() => checkFavourities(id, favourities))
-  }, [favourities])
+    if (favourities) {
+      setHeartColor(checkFavourities(id, favourities));
+    }
+  }, [id, favourities]);
 
   const { mutate } = useMutation({
     mutationFn: () => toFav(id, user?.email, token),
     onSuccess: () => {
-        setUserDetails((prev) => (
-            {
-                ...prev,
-                favourities: updateFavourities(id, prev.favourities)
-            }
-        ))
-    }
+      setUserDetails((prev) => ({
+        ...prev,
+        favourities: updateFavourities(id, prev.favourities),
+      }));
+    },
   });
 
   const handleLike = () => {
@@ -40,15 +40,17 @@ const Heart = ({ id }) => {
     }
   };
 
+  const handleClick = (e) => {
+    e.stopPropagation();
+    handleLike();
+  };
+
   return (
     <div>
       <AiFillHeart
         size={24}
         color={heartColor}
-        onClick={(e) => {
-          e.stopPropagation();
-          handleLike();
-        }}
+        onClick={handleClick}
       />
     </div>
   );

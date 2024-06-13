@@ -4,7 +4,7 @@ import useProperties from "../../hooks/useProperties";
 import { PuffLoader } from "react-spinners";
 import PropertyCard from "../../components/PropertyCard/PropertyCard";
 import "../Properties/Properties.css";
-import UserDetailContext from "../../context/UserDetailContext";
+import UserDetailContext from "../../components/context/UserDetailContext";
 
 const Favourities = () => {
   const { data, isError, isLoading } = useProperties();
@@ -44,7 +44,7 @@ const Favourities = () => {
             // data.map((card, i)=> (<PropertyCard card={card} key={i}/>))
 
             data
-              .filter((property) => favourities.includes(property.id))
+              .filter((property) => favourities?.includes(property.id))
               .filter(
                 (property) =>
                   property.title.toLowerCase().includes(filter.toLowerCase()) ||
